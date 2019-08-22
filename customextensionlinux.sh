@@ -4,7 +4,6 @@ apt-get update
 apt-get install -y openvpn
 apt-get install -y ruby
 
-mkdir api
 curl https://s3.amazonaws.com/cohesive-networks/dnld/VNS3_4x_API_TOOL_20171114.tar.gz | tar xvz
 mv  VNS3_434API_TOOL_20171114 api
 
