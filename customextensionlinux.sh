@@ -30,7 +30,7 @@ NAME=$(api/vnscubed.rb -K api -S vnscubed -H 10.10.10.10 get_next_available_clie
 
 IP=${NAME:7:15}
 
-api/vnscubed.rb -K api -S vnscubed -H 10.10.10.10 fetch_clientpack --name "$IP" --format "conf" -o "clientpack.conf"
+api/vnscubed.rb -K api -S vnscubed -H 10.10.10.10 fetch_clientpack --name "$IP" --fileformat "conf" -o "clientpack.conf"
 
 mv clientpack.conf /etc/openvpn
 
