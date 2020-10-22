@@ -15,7 +15,7 @@ sleep 1200
 wait_for_api () {
    while :
      do
-     apistatus=`curl -k -X GET -u api:vnscubed https://10.10.10.10:8000/api/config 2>&1`
+     apistatus=`curl -k -X GET -u api:VNS3Controller-10.10.10.10 https://10.10.10.10:8000/api/config 2>&1`
         echo $apistatus | grep "refused"
           if [ $? != 0 ] ; then
             break
@@ -26,11 +26,11 @@ wait_for_api () {
 
 wait_for_api
 
-NAME=$(api/vnscubed.rb -K api -S vnscubed -H 10.10.10.10 get_next_available_clientpack | grep 'name')
+NAME=$(api/vnscubed.rb -K api -S VNS3Controller-10.10.10.10 -H 10.10.10.10 get_next_available_clientpack | grep 'name')
 
 IP=${NAME:7:15}
 
-api/vnscubed.rb -K api -S vnscubed -H 10.10.10.10 fetch_clientpack --name "$IP" --fileformat "conf" -o "clientpack.conf"
+api/vnscubed.rb -K api -S VNS3Controller-10.10.10.10 -H 10.10.10.10 fetch_clientpack --name "$IP" --fileformat "conf" -o "clientpack.conf"
 
 mv clientpack.conf /etc/openvpn
 
