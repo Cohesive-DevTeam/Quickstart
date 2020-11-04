@@ -45,6 +45,17 @@ $headers.Add( "Accept", "application/octet-stream" )
 
 $clientpack1 = "100_127_255_193"
 
+function Await-Api
+{
+while($apistatus.StatusCode -ne 200)
+{
+  $apistatus = Invoke-WebRequest -Uri https://"$ip1":8000/api/config -UseBasicParsing -Headers $Headers -ContentType "application/json" -Method GET -ErrorAction SilentlyContinue
+  Start-Sleep -Seconds 30
+  }
+}
+Await-Api; 
+
+
 Invoke-WebRequest -Uri https://"$ip1":8000/api/clientpack?name=$clientpack1"&"fileformat=ovpn -UseBasicParsing -Headers $Headers -ContentType "application/json" -Method GET -o "c:\Program Files\OpenVPN\config\$clientpack1.ovpn"
 
 Start-Service -Name "OpenVPNServiceInteractive" 
