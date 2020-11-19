@@ -2,7 +2,7 @@ Invoke-WebRequest -Uri https://swupdate.openvpn.org/community/releases/OpenVPN-2
 
 Start-Process -FilePath "C:\ovpn.msi" -ArgumentList "ADDLOCAL=OpenVPN.Service,OpenVPN,Drivers,Drivers.Wintun /qn" 
 
-Start-Sleep -s 20
+Start-Sleep -s 120
 
 [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12;
 
@@ -58,6 +58,6 @@ while($apistatus.StatusCode -ne 200)
 Await-Api; 
 
 
-Invoke-WebRequest -Uri https://"$ip1":8000/api/clientpack?name=$clientpack1"&"fileformat=ovpn -UseBasicParsing -Headers $Headers -ContentType "application/json" -Method GET -o "c:\Program Files\OpenVPN\config\$clientpack1.ovpn"
+Invoke-WebRequest -Uri https://"$ip1":8000/api/clientpack?name=$clientpack1"&"fileformat=ovpn -UseBasicParsing -Headers $Headers -ContentType "application/json" -Method GET -o "c:\Program Files\OpenVPN\config-auto\$clientpack1.ovpn"
 
-Start-Service -Name "OpenVPNServiceInteractive"
+Start-Service -Name "OpenVPNService"
