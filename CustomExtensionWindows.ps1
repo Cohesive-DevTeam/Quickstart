@@ -1,6 +1,8 @@
-Invoke-WebRequest -Uri https://swupdate.openvpn.org/community/releases/OpenVPN-2.5-rc2-I601-2-amd64.msi -OutFile "C:\ovpn.msi"
-Start-Process -FilePath "C:\ovpn.msi" -ArgumentList "/qn"
-Start-Sleep -s 120
+Invoke-WebRequest -Uri https://swupdate.openvpn.org/community/releases/OpenVPN-2.5.0-I601-amd64.msi -OutFile "C:\ovpn.msi"
+
+Start-Process -FilePath "C:\ovpn.msi" -ArgumentList "ADDLOCAL=OpenVPN.Service,OpenVPN,Drivers,Drivers.Wintun /qn" 
+
+Start-Sleep -s 20
 
 [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12;
 
