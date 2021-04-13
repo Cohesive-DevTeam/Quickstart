@@ -28,7 +28,7 @@ wait_for_api
 
 NAME=$(api/vnscubed.rb -K api -S VNS3Controller-10.10.10.10 -H 10.10.10.10 get_next_available_clientpack | grep 'name')
 
-IP=${NAME:7:15}
+IP=${NAME:7:13}
 
 api/vnscubed.rb -K api -S VNS3Controller-10.10.10.10 -H 10.10.10.10 fetch_clientpack --name "$IP" --fileformat "conf" -o "clientpack.conf"
 
