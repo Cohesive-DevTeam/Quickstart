@@ -45,8 +45,6 @@ $headers = New-Object "System.Collections.Generic.Dictionary[[String],[String]]"
 $headers.Add( "Authorization", $basicAuthValue )
 $headers.Add( "Accept", "application/octet-stream" )
 
-$clientpack1 = "100_127_255_193"
-
 function Await-Api
 {
 while($apistatus.StatusCode -ne 200)
@@ -57,7 +55,13 @@ while($apistatus.StatusCode -ne 200)
 }
 Await-Api; 
 
+$nextclientpack = Invoke-WebRequest -Uri https://"$ip1":8000/api/clientpacks/next_available -UseBasicParsing -Headers $Headers -ContentType "application/json" -Method POST -ErrorAction SilentlyContinue
 
-Invoke-WebRequest -Uri https://"$ip1":8000/api/clientpack?name=$clientpack1"&"fileformat=ovpn -UseBasicParsing -Headers $Headers -ContentType "application/json" -Method GET -o "c:\Program Files\OpenVPN\config-auto\$clientpack1.ovpn"
+$clientpackdetail = $nextclientpack | ConvertFrom-Json 
+
+$clientpack = $clientpackdetail.response.name
+
+
+Invoke-WebRequest -Uri https://"$ip1":8000/api/clientpack?name=$clientpack"&"fileformat=ovpn -UseBasicParsing -Headers $Headers -ContentType "application/json" -Method GET -o "c:\Program Files\OpenVPN\config-auto\$clientpack1.ovpn"
 
 Restart-Service -Name "OpenVPNService"
