@@ -35,3 +35,9 @@ api/vnscubed.rb -K api -S VNS3Controller-10.10.10.10 -H 10.10.10.10 fetch_client
 mv clientpack.conf /etc/openvpn
 
 systemctl start openvpn@clientpack.service
+
+curl https://cn-dnld.s3.amazonaws.com/cohesive-ra_1.1.1_x86_64.deb
+
+dpkg -i cohesive ra_1.1.1_amd64.deb
+
+service routing-agent start 
