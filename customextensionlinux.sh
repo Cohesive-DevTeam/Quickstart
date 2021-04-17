@@ -10,7 +10,7 @@ mv  vnscubed-ruby-cli-20200827 api
 chmod 700 api/vnscubed.rb
 chmod 700 api/api.rb
 
-sleep 1200
+sleep 600
 
 wait_for_api () {
    while :
