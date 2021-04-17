@@ -36,7 +36,7 @@ mv clientpack.conf /etc/openvpn
 
 systemctl start openvpn@clientpack.service
 
-curl https://cn-dnld.s3.amazonaws.com/cohesive-ra_1.1.1_x86_64.deb
+curl https://cn-dnld.s3.amazonaws.com/cohesive-ra_1.1.1_x86_64.deb --output cohesive_ra_1.1.1_amd64.deb
 
 dpkg -i cohesive ra_1.1.1_amd64.deb
 
